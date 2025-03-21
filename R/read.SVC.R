@@ -41,7 +41,8 @@ read.SVC <- function(filen){
     }
     if (line[1] == "time=") {
       y=unlist(strsplit(x, "="))
-      z=as_date(mdy_hms(str_trim(unlist(strsplit(y[2], ",")))))
+       z=suppressWarnings(as_date(mdy_hms(str_trim(unlist(strsplit(y[2], ","))))))
+      if(any(is.na(z))) {z=as_date(ymd_hms(str_trim(unlist(strsplit(y[2], ",")))))}
       Date=z
     }
     if (line[1] == "longitude=") {
